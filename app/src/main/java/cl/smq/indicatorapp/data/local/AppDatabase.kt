@@ -4,10 +4,15 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import cl.smq.indicatorapp.data.entities.Indicator
+import cl.smq.indicatorapp.data.entities.IndicatorDetail
 
-@Database(entities = [Indicator::class], version = 1, exportSchema = false)
+@Database(entities = [IndicatorDetail::class], version = 1, exportSchema = false)
+@TypeConverters(Converter::class)
 abstract class AppDatabase : RoomDatabase() {
+
+    abstract fun indicatorDetailDao(): IndicatorDetailDao
 
     companion object {
         @Volatile private var instance: AppDatabase? = null
