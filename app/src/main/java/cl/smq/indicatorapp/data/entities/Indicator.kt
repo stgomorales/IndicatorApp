@@ -1,5 +1,7 @@
 package cl.smq.indicatorapp.data.entities
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
@@ -14,7 +16,10 @@ import java.util.*
  * }
  * **/
 
+@Entity(tableName = "indicator")
 data class Indicator(
+    @PrimaryKey
+    val id: UUID = UUID.randomUUID(),
     @SerializedName("codigo")
     val code: String,
     @SerializedName("nombre")
