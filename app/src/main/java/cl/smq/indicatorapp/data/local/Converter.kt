@@ -23,15 +23,21 @@ class Converter {
     }
 
     @TypeConverter
-    fun SerieListToString(serieItems: List<Serie>): String {
-        return gson.toJson(serieItems)
+    fun SerieListToString(serieItems: List<Serie>?): String? {
+        return if (serieItems.isNullOrEmpty())
+            null
+        else
+            gson.toJson(serieItems)
     }
 
     @TypeConverter
-    fun stringToSerieList(data: String): List<Serie> {
+    fun stringToSerieList(data: String): List<Serie>? {
         val listType = object : TypeToken<List<Serie>>() {
         }.type
-        return gson.fromJson(data, listType)
+        return if (data.isNullOrEmpty())
+            null
+        else
+            gson.fromJson(data, listType)
     }
 
     @TypeConverter

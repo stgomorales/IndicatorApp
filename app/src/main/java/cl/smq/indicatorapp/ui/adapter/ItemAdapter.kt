@@ -1,4 +1,4 @@
-package cl.smq.indicatorapp.ui
+package cl.smq.indicatorapp.ui.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -9,7 +9,6 @@ import cl.smq.indicatorapp.R
 import cl.smq.indicatorapp.data.entities.IndicatorDetail
 import cl.smq.indicatorapp.databinding.IndicatorRowBinding
 import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
 
 class ItemAdapter(private val listener: IndicatorItemListener, private val isSerie: Boolean = false): RecyclerView.Adapter<IndicatorViewHolder>() {
 
@@ -27,7 +26,10 @@ class ItemAdapter(private val listener: IndicatorItemListener, private val isSer
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IndicatorViewHolder {
         val binding: IndicatorRowBinding = IndicatorRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return IndicatorViewHolder(binding, listener)
+        return IndicatorViewHolder(
+            binding,
+            listener
+        )
     }
 
     override fun getItemCount(): Int = items.size
