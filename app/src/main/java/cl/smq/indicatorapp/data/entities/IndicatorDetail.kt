@@ -29,5 +29,8 @@ data class IndicatorDetail(
     val unitMeasure: String,
     @SerializedName("serie")
     val series: List<Serie>,
-    val date: Date
+    @SerializedName("fecha")
+    var date: Date,
+    @SerializedName("valor")
+    val value: Double
 )

@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation_graph">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/indicatorListFragment">
 
+    <fragment
+        android:id="@+id/indicatorListFragment"
+        android:name="cl.smq.indicatorapp.ui.indicators.IndicatorListFragment"
+        android:label="indicator_list_fragment"
+        tools:layout="@layout/indicator_list_fragment" >
+        <action
+            android:id="@+id/action_indicatorListFragment_to_indicatorDetailFragment"
+            app:destination="@id/indicatorDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/indicatorDetailFragment"
+        android:name="cl.smq.indicatorapp.ui.detail.IndicatorDetailFragment"
+        android:label="indicator_detail_fragment"
+        tools:layout="@layout/indicator_detail_fragment" />
 </navigation>

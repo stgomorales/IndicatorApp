@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">IndicatorApp</string>
+    <string name="listSearch">Buscar</string>
+
+    <string name="itemNameHint">Nombre</string>
+    <string name="itemValueHint">1000</string>
+    <string name="itemUnitHint">Pesos</string>
 </resources>

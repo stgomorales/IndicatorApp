@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="half_margin">6dp</dimen>
+    <dimen name="margin">12dp</dimen>
+    <dimen name="double_margin">24dp</dimen>
+    <dimen name="special_margin">18dp</dimen>
+    <dimen name="progress_padding">20dp</dimen>
+    <dimen name="item_size">60dp</dimen>
+
+</resources>
