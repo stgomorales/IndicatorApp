@@ -10,6 +10,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import cl.smq.indicatorapp.R
 import cl.smq.indicatorapp.data.entities.IndicatorDetail
@@ -44,6 +45,8 @@ class IndicatorListFragment : Fragment(), ItemAdapter.IndicatorItemListener {
         adapter = ItemAdapter(this)
         binding.listFragmentRecycler.layoutManager = LinearLayoutManager(requireContext())
         binding.listFragmentRecycler.adapter = adapter
+        binding.listFragmentRecycler.addItemDecoration(DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL))
+
     }
 
     private fun setupObservers() {
