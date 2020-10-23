@@ -52,5 +52,5 @@ object AppModule {
     fun provideRepository(remoteDataSource: IndicatorRemoteDataSource,
                           localDataSource: IndicatorDetailDao) =
         IndicatorRepository(remoteDataSource, localDataSource)
-    
+
 }
