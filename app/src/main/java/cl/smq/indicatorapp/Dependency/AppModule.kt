@@ -3,6 +3,7 @@ package cl.smq.indicatorapp.Dependency
 import android.content.Context
 import cl.smq.indicatorapp.BuildConfig
 import cl.smq.indicatorapp.data.local.AppDatabase
+import cl.smq.indicatorapp.data.remote.IndicatorRemoteDataSource
 import cl.smq.indicatorapp.data.remote.IndicatorService
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -32,12 +33,9 @@ object AppModule {
     @Provides
     fun provideIndicatorService(retrofit: Retrofit): IndicatorService = retrofit.create(IndicatorService::class.java)
 
-    /**
-     *  @Singleton
-     *  @Provides
-     *  fun provideCharacterRemoteDataSource(characterService: CharacterService) = CharacterRemoteDataSource(characterService)
-     */
-
+    @Singleton
+    @Provides
+    fun provideIndicatorRemoteDataSource(indicatorService: IndicatorService) = IndicatorRemoteDataSource(indicatorService)
 
     @Singleton
     @Provides
