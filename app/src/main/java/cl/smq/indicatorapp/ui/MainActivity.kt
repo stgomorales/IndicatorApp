@@ -8,7 +8,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import cl.smq.indicatorapp.R
 import cl.smq.indicatorapp.databinding.MainActivityBinding
-import cl.smq.indicatorapp.ui.main.MainFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
