@@ -8,11 +8,12 @@ import androidx.room.TypeConverters
 import cl.smq.indicatorapp.data.entities.Indicator
 import cl.smq.indicatorapp.data.entities.IndicatorDetail
 
-@Database(entities = [IndicatorDetail::class], version = 1, exportSchema = false)
+@Database(entities = [IndicatorDetail::class, Indicator::class], version = 1, exportSchema = false)
 @TypeConverters(Converter::class)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun indicatorDetailDao(): IndicatorDetailDao
+    abstract fun indicatorDao(): IndicatorDao
 
     companion object {
         @Volatile private var instance: AppDatabase? = null

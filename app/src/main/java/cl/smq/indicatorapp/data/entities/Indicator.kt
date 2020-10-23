@@ -1,9 +1,14 @@
 package cl.smq.indicatorapp.data.entities
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
+@Entity(tableName = "Indicator")
 data class Indicator(
+    @PrimaryKey(autoGenerate = true)
+    val id: Long,
     @SerializedName("fecha")
     val date: Date,
     val uf: IndicatorDetail,
@@ -21,7 +26,36 @@ data class Indicator(
     @SerializedName("tasa_desempleo")
     val unemploymentRate: IndicatorDetail,
     val bitcoin: IndicatorDetail
-)
+){
+    fun getIndicatorArray(): List<IndicatorDetail>{
+        val indicators: ArrayList<IndicatorDetail> = ArrayList()
+        uf.date = date
+        indicators.add(uf)
+        ivp.date = date
+        indicators.add(ivp)
+        dolar.date = date
+        indicators.add(dolar)
+        dolarExchange.date = date
+        indicators.add(dolarExchange)
+        euro.date = date
+        indicators.add(euro)
+        ipc.date = date
+        indicators.add(ipc)
+        utm.date = date
+        indicators.add(utm)
+        imacec.date = date
+        indicators.add(imacec)
+        tpm.date = date
+        indicators.add(tpm)
+        poundCopper.date = date
+        indicators.add(poundCopper)
+        unemploymentRate.date = date
+        indicators.add(unemploymentRate)
+        bitcoin.date = date
+        indicators.add(bitcoin)
+        return  indicators
+    }
+}
 
 /**
  * {

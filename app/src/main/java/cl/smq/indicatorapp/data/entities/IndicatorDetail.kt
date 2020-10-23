@@ -19,8 +19,8 @@ import java.util.*
  */
 @Entity(tableName = "IndicatorDetail")
 data class IndicatorDetail(
-    @PrimaryKey
-    val id: String = UUID.randomUUID().toString(),
+    @PrimaryKey(autoGenerate = true)
+    val id: Long,
     @SerializedName("codigo")
     val code: String,
     @SerializedName("nombre")

@@ -2,6 +2,7 @@ package cl.smq.indicatorapp.data.local
 
 import androidx.room.TypeConverter
 import cl.smq.indicatorapp.data.entities.Indicator
+import cl.smq.indicatorapp.data.entities.IndicatorDetail
 import cl.smq.indicatorapp.data.entities.Serie
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -18,6 +19,18 @@ class Converter {
     @TypeConverter
     fun stringToIndicator(data: String): Indicator {
         val listType = object : TypeToken<Indicator>() {
+        }.type
+        return gson.fromJson(data, listType)
+    }
+
+    @TypeConverter
+    fun indicatorDetailToString(indicatorDetail: IndicatorDetail): String {
+        return gson.toJson(indicatorDetail)
+    }
+
+    @TypeConverter
+    fun stringToIndicatorDetail(data: String): IndicatorDetail {
+        val listType = object : TypeToken<IndicatorDetail>() {
         }.type
         return gson.fromJson(data, listType)
     }

@@ -3,6 +3,7 @@ package cl.smq.indicatorapp.Dependency
 import android.content.Context
 import cl.smq.indicatorapp.BuildConfig
 import cl.smq.indicatorapp.data.local.AppDatabase
+import cl.smq.indicatorapp.data.local.IndicatorDao
 import cl.smq.indicatorapp.data.local.IndicatorDetailDao
 import cl.smq.indicatorapp.data.remote.IndicatorRemoteDataSource
 import cl.smq.indicatorapp.data.remote.IndicatorService
@@ -45,12 +46,16 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideCharacterDao(db: AppDatabase) = db.indicatorDetailDao()
+    fun provideIndicatorDetailDao(db: AppDatabase) = db.indicatorDetailDao()
+
+    @Singleton
+    @Provides
+    fun provideIndicatorDao(db: AppDatabase) = db.indicatorDao()
 
     @Singleton
     @Provides
     fun provideRepository(remoteDataSource: IndicatorRemoteDataSource,
-                          localDataSource: IndicatorDetailDao) =
-        IndicatorRepository(remoteDataSource, localDataSource)
-
+                          localDetailDataSource: IndicatorDetailDao,
+                          localIndicatorDataSource: IndicatorDao) =
+        IndicatorRepository(remoteDataSource, localDetailDataSource, localIndicatorDataSource)
 }

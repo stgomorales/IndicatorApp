@@ -10,14 +10,8 @@ import cl.smq.indicatorapp.data.entities.IndicatorDetail
 @Dao
 interface IndicatorDetailDao {
 
-    @Query("SELECT * FROM indicatordetail")
-    fun getAllIndicators() : LiveData<List<IndicatorDetail>>
-
     @Query("SELECT * FROM indicatordetail WHERE code = :code")
     fun getIndicator(code: String): LiveData<IndicatorDetail>
-
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertAll(indicators: List<IndicatorDetail>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(indicator: IndicatorDetail)

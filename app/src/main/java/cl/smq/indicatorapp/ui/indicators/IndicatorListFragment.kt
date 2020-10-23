@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import cl.smq.indicatorapp.R
+import cl.smq.indicatorapp.data.entities.IndicatorDetail
 import cl.smq.indicatorapp.databinding.IndicatorListFragmentBinding
 import cl.smq.indicatorapp.ui.adapter.ItemAdapter
 import cl.smq.indicatorapp.utils.Resource
@@ -50,8 +51,9 @@ class IndicatorListFragment : Fragment(), ItemAdapter.IndicatorItemListener {
             when(it.status){
                 Resource.Status.onSuccess ->{
                     binding.listFragmentProgress.visibility = View.GONE
-                    if (!it.data.isNullOrEmpty())
-                        adapter.setItems(ArrayList(it.data))
+                    if (it.data != null) {
+                        adapter.setItems(it.data.getIndicatorArray() as ArrayList<IndicatorDetail>)
+                    }
                 }
                 Resource.Status.onError ->{
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()

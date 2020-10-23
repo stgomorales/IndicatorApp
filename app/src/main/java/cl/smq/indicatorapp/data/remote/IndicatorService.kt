@@ -8,7 +8,7 @@ import retrofit2.http.Path
 
 interface IndicatorService {
     @GET("api")
-    suspend fun getAllIndicators(): Response<Indicator>
+    suspend fun getIndicators(): Response<Indicator>
 
     @GET("api/{code}")
     suspend fun getIndicatorDetail(@Path("code") code :String) : Response<IndicatorDetail>
