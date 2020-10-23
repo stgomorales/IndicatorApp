@@ -3,8 +3,10 @@ package cl.smq.indicatorapp.Dependency
 import android.content.Context
 import cl.smq.indicatorapp.BuildConfig
 import cl.smq.indicatorapp.data.local.AppDatabase
+import cl.smq.indicatorapp.data.local.IndicatorDetailDao
 import cl.smq.indicatorapp.data.remote.IndicatorRemoteDataSource
 import cl.smq.indicatorapp.data.remote.IndicatorService
+import cl.smq.indicatorapp.data.repository.IndicatorRepository
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -45,4 +47,10 @@ object AppModule {
     @Provides
     fun provideCharacterDao(db: AppDatabase) = db.indicatorDetailDao()
 
+    @Singleton
+    @Provides
+    fun provideRepository(remoteDataSource: IndicatorRemoteDataSource,
+                          localDataSource: IndicatorDetailDao) =
+        IndicatorRepository(remoteDataSource, localDataSource)
+    
 }

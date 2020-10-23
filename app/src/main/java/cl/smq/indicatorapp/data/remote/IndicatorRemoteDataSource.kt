@@ -5,6 +5,6 @@ import javax.inject.Inject
 class IndicatorRemoteDataSource @Inject constructor(
     private val indicatorService: IndicatorService): RemoteDataSource() {
 
-    suspend fun getIndicators() = getResult { indicatorService.getIndicators() }
+    suspend fun getAllIndicators() = getResult { indicatorService.getAllIndicators() }
     suspend fun getIndicatorDetail(code: String) = getResult { indicatorService.getIndicatorDetail(code) }
 }
