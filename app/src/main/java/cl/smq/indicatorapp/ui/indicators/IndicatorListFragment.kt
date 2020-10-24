@@ -33,12 +33,11 @@ class IndicatorListFragment : Fragment(), ItemAdapter.IndicatorItemListener {
         return binding.root
     }
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         setupObservers()
+        binding.listFragmentSortButton.setOnClickListener { sortIndicator() }
     }
 
     private fun setupRecyclerView() {
@@ -75,4 +74,8 @@ class IndicatorListFragment : Fragment(), ItemAdapter.IndicatorItemListener {
         )
     }
 
+
+    fun sortIndicator(){
+        adapter.sortIndicator()
+    }
 }
