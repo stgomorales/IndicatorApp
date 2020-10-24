@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import cl.smq.indicatorapp.R
 import cl.smq.indicatorapp.data.entities.IndicatorDetail
+import cl.smq.indicatorapp.data.entities.Serie
 import cl.smq.indicatorapp.databinding.IndicatorRowBinding
 import java.text.SimpleDateFormat
 
@@ -17,11 +18,23 @@ class ItemAdapter(private val listener: IndicatorItemListener, private val isSer
     }
 
     private val items = ArrayList<IndicatorDetail>()
+    private val series = ArrayList<Serie>()
 
     fun setItems(items: ArrayList<IndicatorDetail>) {
         this.items.clear()
         this.items.addAll(items)
         notifyDataSetChanged()
+    }
+
+    fun setSeries(series: ArrayList<Serie>){
+        this.series.clear()
+        series.sortedByDescending{ it.date}
+        this.series.addAll(series)
+        notifyDataSetChanged()
+    }
+
+    fun getIndicatorCurrentValue(): String{
+        return series[0].toString()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IndicatorViewHolder {
@@ -59,7 +72,7 @@ class IndicatorViewHolder(private val indicatorRowBinding: IndicatorRowBinding, 
             indicatorRowBinding.itemValue.text = item.value.toString()
         }
         else{
-            indicatorRowBinding.itemName.text = item.mane
+            indicatorRowBinding.itemName.text = item.name
             indicatorRowBinding.itemValue.text = item.value.toString()
             indicatorRowBinding.itemUnit.text = item.unitMeasure
             if (item.unitMeasure.toUpperCase().equals("Porcentaje".toUpperCase()))

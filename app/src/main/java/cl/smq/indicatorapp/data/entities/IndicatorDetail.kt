@@ -24,7 +24,7 @@ data class IndicatorDetail(
     @SerializedName("codigo")
     val code: String,
     @SerializedName("nombre")
-    val mane: String,
+    val name: String,
     @SerializedName("unidad_medida")
     val unitMeasure: String,
     @SerializedName("serie")

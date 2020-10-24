@@ -53,9 +53,9 @@ class IndicatorListFragment : Fragment(), ItemAdapter.IndicatorItemListener {
         viewModel.indicators.observe(viewLifecycleOwner, Observer {
             when(it.status){
                 Resource.Status.onSuccess ->{
-                    binding.listFragmentProgress.visibility = View.GONE
                     if (it.data != null) {
                         adapter.setItems(it.data.getIndicatorArray() as ArrayList<IndicatorDetail>)
+                        binding.listFragmentProgress.visibility = View.GONE
                     }
                 }
                 Resource.Status.onError ->{

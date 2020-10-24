@@ -44,7 +44,7 @@ class Converter {
     }
 
     @TypeConverter
-    fun stringToSerieList(data: String): List<Serie>? {
+    fun stringToSerieList(data: String?): List<Serie>? {
         val listType = object : TypeToken<List<Serie>>() {
         }.type
         return if (data.isNullOrEmpty())
@@ -59,7 +59,10 @@ class Converter {
     }
 
     @TypeConverter
-    fun fromDate(date: Date):Long{
-        return date.time;
+    fun fromDate(date: Date?): Long? {
+        return if (date?.time == null)
+            0
+        else
+            return date.time
     }
 }

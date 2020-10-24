@@ -5,4 +5,5 @@
     <string name="itemNameHint">Nombre</string>
     <string name="itemValueHint">1000</string>
     <string name="itemUnitHint">Pesos</string>
+    <string name="itemCodeHint">Codigo</string>
 </resources>
