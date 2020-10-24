@@ -52,11 +52,12 @@ class IndicatorDetailFragment : Fragment(){
                         indicatorDetail = it.data
                         bindIndicatorDetail(it.data)
                         binding.indicatorDetailProgress.visibility = View.GONE
+                    }else{
+                        activity?.onBackPressed()
                     }
                 }
                 Resource.Status.onError ->{
                     Toast.makeText(activity, it.message, Toast.LENGTH_SHORT).show()
-                    activity?.onBackPressed()
                 }
                 Resource.Status.onLoading ->{
                     binding.indicatorDetailProgress.visibility = View.VISIBLE

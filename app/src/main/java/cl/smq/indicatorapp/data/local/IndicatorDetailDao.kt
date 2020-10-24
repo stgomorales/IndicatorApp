@@ -10,7 +10,7 @@ import cl.smq.indicatorapp.data.entities.IndicatorDetail
 @Dao
 interface IndicatorDetailDao {
 
-    @Query("SELECT * FROM indicatordetail WHERE code = :code")
+    @Query("SELECT * FROM indicatordetail WHERE code = :code limit 1")
     fun getIndicator(code: String): LiveData<IndicatorDetail>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
