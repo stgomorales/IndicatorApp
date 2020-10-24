@@ -4,24 +4,32 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import cl.smq.indicatorapp.R
 import cl.smq.indicatorapp.data.entities.IndicatorDetail
 import cl.smq.indicatorapp.databinding.IndicatorRowBinding
+import java.util.*
+import kotlin.collections.ArrayList
 
-class ItemAdapter(private val listener: IndicatorItemListener): RecyclerView.Adapter<IndicatorViewHolder>() {
+class ItemAdapter(private val listener: IndicatorItemListener): RecyclerView.Adapter<IndicatorViewHolder>(),
+    Filterable {
 
     interface IndicatorItemListener {
         fun onClickedIndicator(indicatorCode: String)
     }
 
-    private val items = ArrayList<IndicatorDetail>()
-    private var sortedAsc: Boolean = false
+    private var items = ArrayList<IndicatorDetail>()
+    var oldItems = ArrayList<IndicatorDetail>()
 
+    private var sortedAsc: Boolean = false
 
     fun setItems(items: ArrayList<IndicatorDetail>) {
         this.items.clear()
         this.items.addAll(items)
+        this.oldItems.clear()
+        this.oldItems.addAll(items)
         notifyDataSetChanged()
     }
 
@@ -47,6 +55,35 @@ class ItemAdapter(private val listener: IndicatorItemListener): RecyclerView.Ada
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: IndicatorViewHolder, position: Int) = holder.bind(items.get(position))
+
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val charSearch = constraint.toString()
+                if (charSearch.isEmpty()) {
+                    items = oldItems
+                } else {
+                    val resultList = ArrayList<IndicatorDetail>()
+                    for (item in oldItems) {
+                        if (item.name.toLowerCase(Locale.ROOT).contains(charSearch.toLowerCase(Locale.ROOT)) || item.code.toLowerCase(Locale.ROOT).contains(charSearch.toLowerCase(Locale.ROOT))) {
+                            resultList.add(item)
+                        }
+                    }
+                    items = resultList
+                }
+                val filterResults = FilterResults()
+                filterResults.values = items
+                return filterResults
+            }
+
+            @Suppress("UNCHECKED_CAST")
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                items = results?.values as ArrayList<IndicatorDetail>
+                notifyDataSetChanged()
+            }
+
+        }
+    }
 
 }
 

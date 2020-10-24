@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -38,6 +39,17 @@ class IndicatorListFragment : Fragment(), ItemAdapter.IndicatorItemListener {
         setupRecyclerView()
         setupObservers()
         binding.listFragmentSortButton.setOnClickListener { sortIndicator() }
+        binding.listFragmentSearch.setOnQueryTextListener(object :
+            android.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(newText: String): Boolean {
+                adapter.filter.filter(newText)
+                return false
+            }
+
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+        })
     }
 
     private fun setupRecyclerView() {
