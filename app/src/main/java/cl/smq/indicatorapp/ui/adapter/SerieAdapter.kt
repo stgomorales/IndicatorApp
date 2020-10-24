@@ -21,8 +21,8 @@ class SerieAdapter(): RecyclerView.Adapter<SerieViewHolder>() {
         notifyDataSetChanged()
     }
 
-    fun getIndicatorCurrentValue(): String{
-        return series[0].toString()
+    fun getIndicatorCurrentValue(): Serie{
+        return series[0]
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SerieViewHolder {
@@ -39,8 +39,7 @@ class SerieAdapter(): RecyclerView.Adapter<SerieViewHolder>() {
 
 }
 
-class SerieViewHolder(private val indicatorRowBinding: IndicatorRowBinding) : RecyclerView.ViewHolder(indicatorRowBinding.root),
-    View.OnClickListener {
+class SerieViewHolder(private val indicatorRowBinding: IndicatorRowBinding) : RecyclerView.ViewHolder(indicatorRowBinding.root) {
 
     private lateinit var serie: Serie
 
@@ -48,14 +47,10 @@ class SerieViewHolder(private val indicatorRowBinding: IndicatorRowBinding) : Re
     @SuppressLint("SetTextI18n")
     fun bind(item: Serie) {
         this.serie = item
-        val simpleDateFormat = SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
+        val simpleDateFormat = SimpleDateFormat("dd-MM-yyyy")
         indicatorRowBinding.itemIconLayout.visibility = View.GONE
         indicatorRowBinding.itemUnit.visibility = View.GONE
         indicatorRowBinding.itemName.text = item.value.toString()
         indicatorRowBinding.itemValue.text = simpleDateFormat.format(item.date)
-    }
-
-    override fun onClick(p0: View?) {
-        TODO("Not yet implemented")
     }
 }
