@@ -12,10 +12,10 @@ class IndicatorRepository @Inject constructor(
     private val localIndicatorDataSource: IndicatorDao){
 
     fun getIndicatorDetail(code: String) = performGetOperation(
-        databaseQuery = {localDetailDataSource.getIndicator(code)},
         networkCall = suspend { remoteDataSource.getIndicatorDetail(code) },
-        saveCallResult = {localDetailDataSource.insert(it)}
-    )
+        saveCallResult = {localDetailDataSource.insert(it)},
+        databaseQuery = {localDetailDataSource.getIndicator(code)}
+        )
 
     fun getAllIndicators() = performGetOperation(
         databaseQuery = {localIndicatorDataSource.getIndicators()},

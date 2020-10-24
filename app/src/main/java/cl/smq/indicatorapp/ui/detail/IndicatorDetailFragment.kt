@@ -26,6 +26,7 @@ class IndicatorDetailFragment : Fragment(){
     private val viewModel: IndicatorDetailViewModel by viewModels()
     private lateinit var adapter: SerieAdapter
     private var indicatorDetail: IndicatorDetail? = null
+    private var firstSuccess: Boolean = true;
 
 
     override fun onCreateView(
@@ -53,7 +54,10 @@ class IndicatorDetailFragment : Fragment(){
                         bindIndicatorDetail(it.data)
                         binding.indicatorDetailProgress.visibility = View.GONE
                     }else{
-                        activity?.onBackPressed()
+                        if (!firstSuccess)
+                            activity?.onBackPressed()
+                        else
+                            firstSuccess = false
                     }
                 }
                 Resource.Status.onError ->{
