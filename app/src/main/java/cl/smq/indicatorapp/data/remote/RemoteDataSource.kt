@@ -5,6 +5,7 @@ import retrofit2.Response
 
 abstract class RemoteDataSource {
 
+    private val errorMessage: String = "No hay conexión con el servidor, no se pueden actualizar los datos"
 
     protected suspend fun <T> getResult(call: suspend () -> Response<T>): Resource<T> {
         try {
@@ -13,9 +14,9 @@ abstract class RemoteDataSource {
                 val body = response.body()
                 if (body != null) return Resource.onSuccess(body)
             }
-            return  Resource.onError("${response.code()} - ${response.message()}")
+            return  Resource.onError(errorMessage)
         } catch (e: Exception) {
-            return Resource.onError(e.message ?: e.toString())
+            return Resource.onError(errorMessage)
         }
     }
 }
